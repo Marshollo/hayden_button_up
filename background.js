@@ -59,7 +59,7 @@ function initializeButtons() {
     Object.assign(wrapper.style, {
       marginTop: '5px',
       display: 'flex',
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
       alignItems: 'center',
       gap: '5px',
       whiteSpace: 'nowrap',
