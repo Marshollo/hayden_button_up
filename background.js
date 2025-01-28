@@ -74,7 +74,6 @@ function initializeButtons() {
 
     const buttonsI = createButtonGroup('Reject All:', [
       { text: 'Outside enforce zone', option: 'Outside enforce zone', key: 'KeyI' },
-      { text: 'Plate illegible', option: 'Plate illegible', key: 'KeyI' },
       { text: 'Other', option: 'Other', key: 'KeyI' },
     ]);
 
