@@ -29,22 +29,29 @@ function initializeButtons() {
     const container = findExactContainerFluid();
     if (!container) return;
 
-    const secondChild = container.children[1];
-    if (!secondChild) {
-      console.error('Second child in container-fluid not found.');
+    const style = document.createElement('style');
+    style.textContent = `
+    [class^="sc-iMWBiJ"] {
+      height: 0.2em;
+    }
+  `;
+    document.head.appendChild(style);
+
+    const firstChild = container.children[0];
+    if (!firstChild) {
+      console.error('First child in container-fluid not found.');
       return;
     }
 
-    if (secondChild.querySelector('.custom-button-wrapper')) {
+    if (container.querySelector('.custom-button-wrapper')) {
       console.log('Buttons already exist.');
       return;
     }
 
     console.log('Adding new buttons...');
-    secondChild.style.height = '2em';
 
     const buttonWrapper = createButtonWrapper();
-    secondChild.appendChild(buttonWrapper);
+    container.insertBefore(buttonWrapper, firstChild.nextSibling);
     console.log('Buttons have been added!');
   }
 
@@ -58,6 +65,7 @@ function initializeButtons() {
     wrapper.className = 'custom-button-wrapper';
     Object.assign(wrapper.style, {
       marginTop: '5px',
+      marginBottom: '0.2em',
       display: 'flex',
       justifyContent: 'flex-end',
       alignItems: 'center',
@@ -70,18 +78,18 @@ function initializeButtons() {
       { text: 'Plate illegible', option: 'Plate illegible', key: 'KeyU' },
       { text: 'Moving vehicle', option: 'Moving vehicle', key: 'KeyU' },
       { text: 'Location changed', option: 'Location changed', key: 'KeyU' },
-    ]);
+    ], 'rgb(235, 76, 85)'); // Kolor dla buttonsU
 
     const buttonsI = createButtonGroup('Reject All:', [
       { text: 'Outside enforce zone', option: 'Outside enforce zone', key: 'KeyI' },
       { text: 'Other', option: 'Other', key: 'KeyI' },
-    ]);
+    ], 'rgb(100, 0, 0)'); // Inny kolor dla buttonsI
 
     wrapper.append(buttonsU.label, buttonsU.group, buttonsI.label, buttonsI.group);
     return wrapper;
   }
 
-  function createButtonGroup(labelText, buttons) {
+  function createButtonGroup(labelText, buttons, color) {
     const label = document.createElement('span');
     label.textContent = labelText;
     label.style.fontWeight = 'bold';
@@ -96,7 +104,7 @@ function initializeButtons() {
       const button = document.createElement('button');
       button.textContent = text;
       Object.assign(button.style, {
-        background: 'rgb(235, 76, 85)',
+        background: color,
         border: 'none',
         color: 'white',
         borderRadius: '8px',
