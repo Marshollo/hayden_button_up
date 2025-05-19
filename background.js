@@ -31,7 +31,7 @@ function initializeButtons() {
 
     const style = document.createElement('style');
     style.textContent = `
-    [class^="sc-iMWBiJ"] {
+    [class="sc-bBeLUv"] {
       height: 0.2em;
     }
   `;
